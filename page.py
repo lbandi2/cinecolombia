@@ -7,6 +7,7 @@ class Page:
     def __init__(self, url, filename):
         self.url = url
         self.filename = filename
+        self.type = self.filename.split('.')[0].split('_')[1]
         self.soup = ''
         self.movies = []
         self.main()
@@ -16,14 +17,15 @@ class Page:
         self.save_page(page, self.filename)
         self.soup = self.load_page(self.filename)
         self.parse_page()
+
+        print(f"\nFound {len(self.movies)} {self.type} movies:")
         for x in self.movies:
-            print(x)
-        print(f"Found {len(self.movies)} movies.")
+            print(f"- {x.title}")
         
     def grab_page(self, url):
         webpage = requests.get(url)
         content = webpage.content
-        print("Grabbing webpage..")
+        print(f"\nGrabbing webpage..")
         return content
     
     def save_page(self, content, filename):

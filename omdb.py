@@ -64,14 +64,14 @@ class OMDB:
             if resp.status_code == 200:
                 if json_response['Response'] == 'True':
                     print(f"[OMDB] Found movie '{self.title}'.")
-                    self.get_attributes(json_response)
+                    self.get_attributes(json_response)  # FIXME: This needs to be done better, there's repetition below
                     return True
         else:
             print(f"[OMDB] Couldn't find movie '{self.title}'.")
             self.get_attributes(json_response)
             return False
 
-    def get_attributes(self, response):
+    def get_attributes(self, response): # FIXME: Find a cleaner way to do this
         try:
             self.imdb_id = f"https://www.imdb.com/title/{response['imdbID']}"
             self.country = response['Country'].split(",")[0]
