@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+import os
 from datetime import datetime
 from movie import Movie
 from db import add_records, delete_records
@@ -15,6 +16,7 @@ class Page:
         self.main()
 
     def main(self):
+        self.startup_check()
         page = self.grab_page(self.url)
         self.save_page(page, self.filename)
         self.soup = self.load_page(self.filename)
@@ -26,7 +28,19 @@ class Page:
         print(f"Found {len(self.movies)} movies.")
         for index, movie in enumerate(self.movies, start=1):
             print(index, movie.title)
-        
+
+    def startup_check(self):
+        if os.path.isdir('webpages') == False:
+            self.make_dir('webpages')
+
+    def make_dir(self, dir_name):
+        try:
+            os.mkdir(dir_name)
+        except OSError:
+            print (f"Creation of the directory '{dir_name}' failed")
+        else:
+            print(f"Succesfully created folder '{dir_name}'..")		
+
     def grab_page(self, url):
         webpage = requests.get(url)
         content = webpage.content
