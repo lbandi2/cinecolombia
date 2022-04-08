@@ -1,13 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+from datetime import datetime
 from movie import Movie
+from db import add_records, delete_records
+from utils import replace_str
 
 class Page:
     def __init__(self, url, filename):
         self.url = url
-        self.filename = filename
-        self.type = self.filename.split('.')[0].split('_')[1]
+        self.filename = f'./webpages/{filename}'
         self.soup = ''
         self.movies = []
         self.main()
@@ -16,24 +18,27 @@ class Page:
         page = self.grab_page(self.url)
         self.save_page(page, self.filename)
         self.soup = self.load_page(self.filename)
+        if 'playing' in self.filename:
+            delete_records('playing')
+        elif 'upcoming' in self.filename:
+            delete_records('upcoming')
         self.parse_page()
-
-        print(f"\nFound {len(self.movies)} {self.type} movies:")
-        for x in self.movies:
-            print(f"- {x.title}")
+        print(f"Found {len(self.movies)} movies.")
+        for index, movie in enumerate(self.movies, start=1):
+            print(index, movie.title)
         
     def grab_page(self, url):
         webpage = requests.get(url)
         content = webpage.content
-        print(f"\nGrabbing webpage..")
+        print("Grabbing webpage..")
         return content
     
     def save_page(self, content, filename):
-        with open(f'./{filename}', 'wb') as webpage:
+        with open(filename, 'wb') as webpage:
             webpage.write(content)
 
     def load_page(self, filename):
-        with open(f'./{filename}', 'r', encoding="utf-8") as webpage:
+        with open(filename, 'r', encoding="utf-8") as webpage:
             return BeautifulSoup(webpage, 'html.parser')
 
     def find_title_spanish(self, soup):
@@ -50,11 +55,23 @@ class Page:
             return '-'
 
     def find_date(self, soup):
+        rep = {
+            "ene": "jan",
+            "abr": "apr",
+            "ago": "aug",
+            "dic": "dec"
+            }
+
         table = soup.find_all('span', ('class', ('movie-item__meta')))
         for x in table:
             if 'Estreno:' in x.text:
-                estreno = x.text.split('Estreno:')[-1].strip()
-                return estreno
+                estreno = replace_str(x.text.split('Estreno:')[-1].strip().lower(), rep)
+                try:
+                    date = datetime.strptime(estreno, "%d-%b-%Y").strftime("%Y-%m-%d")
+                    return date
+                except ValueError:
+                    print("[ERROR] Could not process date")
+                    return None
 
     def find_genres(self, soup):
         clean_genres = []
@@ -75,7 +92,7 @@ class Page:
             except AttributeError:
                 pass
         else:
-            return '-'
+            return None
 
     def find_link(self, soup):
         table = soup.find('a', ('class', ('movie-item')))
@@ -115,4 +132,10 @@ class Page:
             image = self.find_image(x)
             presale = self.find_presale(x)
 
-            self.movies.append(Movie(title, date, genres, running_time, image, link, presale))
+            movie = Movie(title, date, genres, running_time, image, link, presale)
+            self.movies.append(movie)
+            if 'playing' in self.filename:
+                add_records(movie, 'playing')
+            elif 'upcoming' in self.filename:
+                add_records(movie, 'upcoming')
+

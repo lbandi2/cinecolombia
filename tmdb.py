@@ -71,13 +71,15 @@ class TMDB:
     def get_slug(self):
         """Return slug for current movie title."""
 
-        rep = {"&": "and",
-               "$": "",
-               " - ": "-",
-               " ": "-",
-               ":": "",
-               "'": "",
-               ".": ""}
+        rep = {
+            "&": "and",
+            "$": "",
+            " - ": "-",
+            " ": "-",
+            ":": "",
+            "'": "",
+            ".": ""
+            }
 
         if self.tmdb_id != '-':
             slug = replace_str(self.title.lower(), rep)

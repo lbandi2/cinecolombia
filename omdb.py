@@ -12,7 +12,7 @@ class OMDB:
         self.year = year
 
         if not self.is_in_omdb():
-            self.search = Search(self.title)
+            self.search = Search(self.title, self.year)
             if self.search.good_match:
                 if self.search_by_id(self.search.omdb_id):
                     self.is_in_omdb()
@@ -64,14 +64,14 @@ class OMDB:
             if resp.status_code == 200:
                 if json_response['Response'] == 'True':
                     print(f"[OMDB] Found movie '{self.title}'.")
-                    self.get_attributes(json_response)  # FIXME: This needs to be done better, there's repetition below
+                    self.get_attributes(json_response)
                     return True
         else:
             print(f"[OMDB] Couldn't find movie '{self.title}'.")
             self.get_attributes(json_response)
             return False
 
-    def get_attributes(self, response): # FIXME: Find a cleaner way to do this
+    def get_attributes(self, response):
         try:
             self.imdb_id = f"https://www.imdb.com/title/{response['imdbID']}"
             self.country = response['Country'].split(",")[0]

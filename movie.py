@@ -25,20 +25,3 @@ class Movie:
     def _genres(self):
         if self.omdb.genres != '-':
             self.genres = self.omdb.genres
-
-    def __str__(self):
-        string = f"""
-        Title: {self.title}
-        Date: {self.date}
-        Genres: {", ".join(self.genres)}
-        Country: {self.omdb.country}
-        Language: {self.omdb.language}
-        Runtime: {self.running_time}
-        Director: {self.omdb.director}
-        Actors: {self.omdb.actors}
-        Is Wanted?: {self.is_wanted}
-        Presale: {self.presale}
-        Poster: {self.image}
-        Link: {self.link}
-        """
-        return string

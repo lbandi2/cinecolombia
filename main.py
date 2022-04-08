@@ -6,7 +6,7 @@ url_playing = "https://www.cinecolombia.com/bogota/cartelera"
 filename_playing = "cinecolombia_playing.html"
 
 def main():
-    a = Page(url_upcoming, filename_upcoming)
-    b = Page(url_playing, filename_playing)
+    upcoming = Page(url_upcoming, filename_upcoming)
+    playing = Page(url_playing, filename_playing)
 
 main()
