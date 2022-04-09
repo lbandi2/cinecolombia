@@ -48,6 +48,10 @@ class Search:
         except AttributeError:
             print(f"[IMDB] Couldn't find a suitable match for {self.title}")
             return False
+        except ValueError:
+            print(f"[IMDB] Couldn't find a suitable match for {self.title}")
+            return False
+
 
 
 
