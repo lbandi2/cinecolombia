@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -8,6 +10,7 @@ from db import add_records, delete_records
 from utils import replace_str
 
 class Page:
+    DIR_PATH = f"{os.path.dirname(os.path.realpath(__file__))}"
     def __init__(self, url, filename):
         self.url = url
         self.filename = f'./webpages/{filename}'
@@ -30,12 +33,15 @@ class Page:
             print(index, movie.title)
 
     def startup_check(self):
-        if os.path.isdir('webpages') == False:
+        if os.path.isdir(f"{self.DIR_PATH}/webpages") == False:
             self.make_dir('webpages')
+        if os.path.isdir(f"{self.DIR_PATH}/logs") == False:
+            self.make_dir('logs')
 
     def make_dir(self, dir_name):
         try:
-            os.mkdir(dir_name)
+            path = os.path.join(self.DIR_PATH, dir_name)
+            os.mkdir(path)
         except OSError:
             print (f"Creation of the directory '{dir_name}' failed")
         else:
