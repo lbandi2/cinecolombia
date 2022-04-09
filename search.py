@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup, SoupStrainer
-from googlesearch import search
+from googlesearch import search # v1.0.1
 import re
 
 class Search:
