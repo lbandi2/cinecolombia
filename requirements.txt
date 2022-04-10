@@ -1,4 +1,4 @@
 beautifulsoup4==4.11.1
-google_search==1.1.1
-mysql_connector_repackaged==0.3.1
+googlesearch-python==1.0.1
+mysql-connector-python==8.0.27
 requests==2.25.1

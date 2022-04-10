@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from page import Page
 
 url_upcoming = "https://www.cinecolombia.com/bogota/pronto"
