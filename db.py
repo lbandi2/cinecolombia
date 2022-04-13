@@ -4,7 +4,7 @@ from secrets import json_secret
 DB_HOST = json_secret('db', 'host')
 DB_USER = json_secret('db', 'user')
 DB_PASSWORD = json_secret('db', 'password')
-DB = json_secret('db', 'table')
+DB = json_secret('db', 'db')
 DB_TABLE_PLAYING = "playing"
 DB_TABLE_UPCOMING = "upcoming"
 MAX_AMOUNT = 50
