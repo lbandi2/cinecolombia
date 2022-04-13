@@ -51,6 +51,9 @@ class Search:
         except ValueError:
             print(f"[IMDB] Couldn't find a suitable match for {self.title}")
             return False
+        except IndexError:
+            print(f"[IMDB] Couldn't find a suitable match for {self.title}")
+            return False
 
 
 
@@ -64,7 +67,7 @@ class Search:
 # print(a.imdb_link)
 # print(a.omdb_id)
 # print(a.title)
-# a = Search('Matrix', 1999)
+a = Search('La Trampa', 2022)
 # print(a.good_match)
 
 # print(a.title)
