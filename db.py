@@ -1,12 +1,10 @@
 from mysql.connector import connect, Error
-from secrets import get_secret
+from secrets import json_secret
 
-from requests import delete
-
-DB_HOST = get_secret('db_host')
-DB_USER = get_secret('db_user')
-DB_PASSWORD = get_secret('db_password')
-DB = "cinecolombia"
+DB_HOST = json_secret('db', 'host')
+DB_USER = json_secret('db', 'user')
+DB_PASSWORD = json_secret('db', 'password')
+DB = json_secret('db', 'table')
 DB_TABLE_PLAYING = "playing"
 DB_TABLE_UPCOMING = "upcoming"
 MAX_AMOUNT = 50

@@ -1,12 +1,12 @@
 import requests
 from bs4 import BeautifulSoup, SoupStrainer
-from googlesearch import search # v1.0.1
+from googlesearch import search
 import re
 
 class Search:
     def __init__(self, title, year):
         self.title = title
-        self.year = year
+        self.year = int(year)
         self.search = self.do_search()
         self.imdb_link = self.get_imdb_link()
         if self.imdb_link != '-':

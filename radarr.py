@@ -1,8 +1,8 @@
 import requests
-from secrets import get_secret
+from secrets import json_secret
 
-RADARR_URL = get_secret('radarr_url')
-RADARR_API = get_secret('radarr_api')
+RADARR_URL = json_secret('radarr', 'url')
+RADARR_API = json_secret('radarr', 'api_key')
 
 class Radarr:
     def __init__(self, tmdb_id):

@@ -1,8 +1,8 @@
 import requests
-from secrets import get_secret
+from secrets import json_secret
 from utils import replace_str
 
-TMDB_API = get_secret('tmdb_api')
+TMDB_API = json_secret('tmdb', 'api_key')
 
 class TMDB:
     def __init__(self, movie, year):

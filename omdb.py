@@ -1,9 +1,9 @@
 import requests
-from secrets import get_secret
+from secrets import json_secret
 from search import Search
 
 URL = 'http://www.omdbapi.com/'
-OMDB_API = get_secret('omdb_api')
+OMDB_API = json_secret('omdb', 'api_key')
 
 class OMDB:
     def __init__(self, title, year):
@@ -30,7 +30,7 @@ class OMDB:
             if json_response['Response'] == 'True':
                 title = json_response['Title']
                 year = json_response['Year']
-                print(f"[OMDB] Found searched movie '{title} ({year})'.")
+                # print(f"[OMDB] Found searched movie '{title} ({year})'.")
                 self.get_fields(json_response)
                 return True
         else:
