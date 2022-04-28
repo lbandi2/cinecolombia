@@ -132,3 +132,5 @@ dmypy.json
 .secrets
 test.py
 .secrets.json
+logs/
+webpages/
