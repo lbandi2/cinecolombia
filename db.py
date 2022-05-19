@@ -1,7 +1,6 @@
 from mysql.connector import connect, Error
 import os
 from dotenv import load_dotenv
-# from secrets import json_secret
 
 load_dotenv()
 
