@@ -1,9 +1,12 @@
 import requests
-from secrets import json_secret
+import os
+from dotenv import load_dotenv
 from search import Search
 
+load_dotenv()
+
 URL = 'http://www.omdbapi.com/'
-OMDB_API = json_secret('omdb', 'api_key')
+OMDB_API = os.getenv('OMDB_API')
 
 class OMDB:
     def __init__(self, title, year):

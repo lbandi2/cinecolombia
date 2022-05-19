@@ -1,10 +1,14 @@
 from mysql.connector import connect, Error
-from secrets import json_secret
+import os
+from dotenv import load_dotenv
+# from secrets import json_secret
 
-DB_HOST = json_secret('db', 'host')
-DB_USER = json_secret('db', 'user')
-DB_PASSWORD = json_secret('db', 'password')
-DB = json_secret('db', 'db')
+load_dotenv()
+
+DB_HOST = os.getenv('DB_HOST')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB = os.getenv('DB')
 DB_TABLE_PLAYING = "playing"
 DB_TABLE_UPCOMING = "upcoming"
 MAX_AMOUNT = 50

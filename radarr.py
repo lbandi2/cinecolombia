@@ -1,8 +1,11 @@
 import requests
-from secrets import json_secret
+import os
+from dotenv import load_dotenv
 
-RADARR_URL = json_secret('radarr', 'url')
-RADARR_API = json_secret('radarr', 'api_key')
+load_dotenv()
+
+RADARR_URL = os.getenv('RADARR_URL')
+RADARR_API = os.getenv('RADARR_API')
 
 class Radarr:
     def __init__(self, tmdb_id):

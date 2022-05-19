@@ -1,8 +1,11 @@
 import requests
-from secrets import json_secret
+import os
+from dotenv import load_dotenv
 from utils import replace_str
 
-TMDB_API = json_secret('tmdb', 'api_key')
+load_dotenv()
+
+TMDB_API = os.getenv('TMDB_API')
 
 class TMDB:
     def __init__(self, movie, year):
