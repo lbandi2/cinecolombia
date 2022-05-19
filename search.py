@@ -16,9 +16,10 @@ class Search:
             self.good_match = False
 
     def do_search(self):
-        query = f"{self.title} {self.year} imdb"
+        query = f"{self.title} {self.year} site:imdb.com"
         print(f"Searching Google for '{self.title} ({self.year})'")
         results = search(query, lang='en', num_results=5)
+        print(results)
         return results
 
     def get_imdb_link(self):
@@ -58,7 +59,7 @@ class Search:
 
 
 
-# a = Search("Rifkin'S Festiva", 2020)
+# a = Search("Minions 2: Nace un Villano", 2022)
 # a = Search("Resident Evil: Welcome to Racoon City", 2021)
 # print(a.good_match)
 # a = Search("Sonic The Headgehog 2", 2022)
@@ -67,7 +68,7 @@ class Search:
 # print(a.imdb_link)
 # print(a.omdb_id)
 # print(a.title)
-a = Search('La Trampa', 2022)
+# a = Search('La Trampa', 2022)
 # print(a.good_match)
 
 # print(a.title)
