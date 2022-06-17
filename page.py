@@ -43,7 +43,7 @@ class Page:
         except OSError:
             print (f"Creation of the directory '{dir_name}' failed")
         else:
-            print(f"Succesfully created folder '{dir_name}'..")		
+            print(f"Successfully created folder '{dir_name}'..")		
 
     def grab_page(self, url):
         webpage = requests.get(url)
@@ -77,6 +77,7 @@ class Page:
             "ene": "jan",
             "abr": "apr",
             "ago": "aug",
+            "sept": "sep",
             "dic": "dec"
             }
 
