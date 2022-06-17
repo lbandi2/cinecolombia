@@ -111,7 +111,7 @@ class OMDB:
         return string
 
 
-# a = OMDB('TeSigo', 2021)
+# a = OMDB("Daniel isn't real", 2022)
 # a = OMDB('Encanto', 2021)
 # a = OMDB('Resident Evil Welcome to Racoon City', 2021)
 # a = OMDB('El Paseo 6', '-')

@@ -19,7 +19,6 @@ class Search:
         query = f"{self.title} {self.year} site:imdb.com"
         print(f"Searching Google for '{self.title} ({self.year})'")
         results = search(query, lang='en', num_results=5)
-        print(results)
         return results
 
     def get_imdb_link(self):
@@ -40,7 +39,7 @@ class Search:
         try:
             found_year = int([x.text for x in nums if re.match('\d{4}$', x.text[:4])][0])
 
-            if found_year in [self.year, self.year -1, self.year -2]:
+            if found_year in [self.year, self.year -1, self.year -2, self.year -3]:
                 print(f"[IMDB] Found a suitable match, correct title is: '{found_title} ({found_year})'")
                 return True
             else:
@@ -61,6 +60,7 @@ class Search:
 
 # a = Search("Minions 2: Nace un Villano", 2022)
 # a = Search("Resident Evil: Welcome to Racoon City", 2021)
+# a = Search("Daniel ins't real", 2021)
 # print(a.good_match)
 # a = Search("Sonic The Headgehog 2", 2022)
 # a = Search("Blad", 1998)
