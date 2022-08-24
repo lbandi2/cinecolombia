@@ -80,7 +80,7 @@ class OMDB:
             self.country = response['Country'].split(",")[0]
             self.genres = response['Genre'].lower().split(", ")
             self.runtime = response['Runtime'].split(" ")[0]
-            self.year = int(response['Year'])
+            self.year = int(response['Year'][:4])
             self.director = response['Director']
             self.actors = response['Actors']
             self.language = response['Language']
@@ -111,7 +111,7 @@ class OMDB:
         return string
 
 
-# a = OMDB("Daniel isn't real", 2022)
+# a = OMDB("Un parcero en nueva york", 2022)
 # a = OMDB('Encanto', 2021)
 # a = OMDB('Resident Evil Welcome to Racoon City', 2021)
 # a = OMDB('El Paseo 6', '-')
