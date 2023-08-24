@@ -59,18 +59,36 @@ class Page:
         with open(filename, 'r', encoding="utf-8") as webpage:
             return BeautifulSoup(webpage, 'html.parser')
 
-    def find_title_spanish(self, soup):
-        title = soup.find('h2', ('class', ('movie-item__title')))
-        return title.text
+    # def find_title_spanish(self, soup):
+    #     title = soup.find('h2', ('class', ('movie-item__title')))
+    #     return title.text
+
+    # def find_title_english(self, soup):
+    #     try:
+    #         table = soup.find('div', ('class', ('movie-item__basics')))
+    #         title = table.find('span', ('class', ('movie-item__meta--bold')))
+    #         title = re.split('T.tulo en ingl.s:', title.text)[-1].strip()
+    #         return title
+    #     except:
+    #         return '-'
 
     def find_title_english(self, soup):
         try:
             table = soup.find('div', ('class', ('movie-item__basics')))
+            title = table.find('h2', ('class', ('movie-item__title')))
+            return title.text
+        except:
+            return '-'
+
+    def find_title_spanish(self, soup):
+        try:
+            table = soup.find('div', ('class', ('movie-item__basics')))
             title = table.find('span', ('class', ('movie-item__meta--bold')))
-            title = re.split('T.tulo en ingl.s:', title.text)[-1].strip()
+            title = re.split('T.tulo en espa.ol:', title.text)[-1].strip()
             return title
         except:
             return '-'
+
 
     def find_date(self, soup):
         rep = {
